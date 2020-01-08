@@ -7,6 +7,7 @@
 </head>
 
 <body>
+    <h1>Weather Dashboard</h1>
     <input id="city"></input>
     <button id="getWeatherForcast">Search For A City</button>
     <div class="ShowWeatherForcast"></div>
@@ -27,8 +28,9 @@
                     success: function (data) {
                         var wf = '';
                         $.each(data.weather, function (index, val) {
-                            wf += '<p><b>' + data.name + "</b></p>" + data.main.temp + '&deg;C ' +
-                                ' | ' + val.main + ", " + val.description
+                            wf += '<p><b>' + data.name + "</b></p> Temperature: " + data.main.temp + '&deg;C ' 
+                            + " Humidity: " + data.main.humidity + 
+                               " % " + " Wind Speed: " +  data.wind.speed + " MPH "
                         });
                         $(".ShowWeatherForcast").html(wf);
                     }
@@ -38,6 +40,7 @@
             });
         });
     </script>
+    <h2>5-Day Forcast</h2>
 
 </body>
 
