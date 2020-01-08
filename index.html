@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Weather Dashboard</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+
+<body>
+    <input id="city"></input>
+    <button id="getWeatherForcast">Search For A City</button>
+    <div class="ShowWeatherForcast"></div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#getWeatherForcast").click(function () {
+
+                var city = $("#city").val();
+                var key = '6000229ba681c93b80335817e159fb87';
+
+                $.ajax({
+                    url: 'http://api.openweathermap.org/data/2.5/weather',
+                    dataType: 'json',
+                    type: 'GET',
+                    data: { q: city, appid: key, units: 'metric' },
+                    success: function (data) {
+                        var wf = '';
+                        $.each(data.weather, function (index, val) {
+                            wf += '<p><b>' + data.name + "</b></p>" + data.main.temp + '&deg;C ' +
+                                ' | ' + val.main + ", " + val.description
+                        });
+                        $(".ShowWeatherForcast").html(wf);
+                    }
+
+                })
+
+            });
+        });
+    </script>
+
+</body>
+
+</html>
